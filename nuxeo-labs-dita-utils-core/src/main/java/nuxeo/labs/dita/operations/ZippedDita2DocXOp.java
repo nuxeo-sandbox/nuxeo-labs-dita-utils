@@ -19,15 +19,13 @@
 
 package nuxeo.labs.dita.operations;
 
-import org.apache.commons.lang3.StringUtils;
+import nuxeo.labs.dita.ZippedDita2DocX;
 import org.nuxeo.ecm.automation.core.Constants;
 import org.nuxeo.ecm.automation.core.annotations.Context;
 import org.nuxeo.ecm.automation.core.annotations.Operation;
 import org.nuxeo.ecm.automation.core.annotations.OperationMethod;
-import org.nuxeo.ecm.automation.core.annotations.Param;
+import org.nuxeo.ecm.core.api.Blob;
 import org.nuxeo.ecm.core.api.CoreSession;
-import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.PathRef;
 
 /**
  * Extract zipped DITA project and convert to DOCX.
@@ -42,15 +40,10 @@ public class ZippedDita2DocXOp {
     @Context
     protected CoreSession session;
 
-    @Param(name = "path", required = false)
-    protected String path;
-
     @OperationMethod
-    public DocumentModel run() {
-        if (StringUtils.isBlank(path)) {
-            return session.getRootDocument();
-        } else {
-            return session.getDocument(new PathRef(path));
-        }
+    public Blob run(Blob inBlob) {
+        ZippedDita2DocX zd2d = new ZippedDita2DocX(inBlob);
+
+        return zd2d.getDocx();
     }
 }
