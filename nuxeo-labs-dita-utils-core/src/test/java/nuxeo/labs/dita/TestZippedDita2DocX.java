@@ -1,21 +1,46 @@
+/*
+ * (C) Copyright 2016 Nuxeo SA (http://nuxeo.com/) and others.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Contributors:
+ *     Josh Fletcher
+ */
+
 package nuxeo.labs.dita;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import nuxeo.labs.dita.operations.ZippedDita2DocXOp;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.nuxeo.common.utils.FileUtils;
 import org.nuxeo.ecm.automation.AutomationService;
 import org.nuxeo.ecm.automation.OperationContext;
 import org.nuxeo.ecm.automation.OperationException;
 import org.nuxeo.ecm.automation.test.AutomationFeature;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
+import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.test.DefaultRepositoryInit;
 import org.nuxeo.ecm.core.test.annotations.Granularity;
 import org.nuxeo.ecm.core.test.annotations.RepositoryConfig;
@@ -29,26 +54,32 @@ import org.nuxeo.runtime.test.runner.FeaturesRunner;
 @Deploy("nuxeo.labs.dita.utils.core.nuxeo-labs-dita-utils-core")
 public class TestZippedDita2DocX {
 
+    protected static final String THE_ZIP = "files/dita_test.zip";
+    protected File zipFile;
+    protected FileBlob zipFileBlob;
+
     @Inject
     protected CoreSession session;
 
     @Inject
     protected AutomationService automationService;
 
-    @Test
-    public void shouldCallTheOperation() throws OperationException {
-        OperationContext ctx = new OperationContext(session);
-        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocXOp.ID);
-        assertEquals("/", doc.getPathAsString());
+    @Before
+    public void setup() throws IOException {
+
+        assertNotNull(session);
+        assertNotNull(automationService);
+
+
+        zipFile = FileUtils.getResourceFileFromContext(THE_ZIP);
+        zipFileBlob = new FileBlob(zipFile);
+
     }
 
     @Test
-    public void shouldCallWithParameters() throws OperationException {
-        final String path = "/default-domain";
-        OperationContext ctx = new OperationContext(session);
-        Map<String, Object> params = new HashMap<>();
-        params.put("path", path);
-        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocXOp.ID, params);
-        assertEquals(path, doc.getPathAsString());
+    public void shouldCallTheOperation() throws OperationException {
+
     }
+
+
 }
