@@ -1,4 +1,4 @@
-package nuxeo.labs.dita.utils.core;
+package nuxeo.labs.dita;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import nuxeo.labs.dita.operations.ZippedDita2DocXOp;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.nuxeo.ecm.automation.AutomationService;
@@ -37,7 +38,7 @@ public class TestZippedDita2DocX {
     @Test
     public void shouldCallTheOperation() throws OperationException {
         OperationContext ctx = new OperationContext(session);
-        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocX.ID);
+        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocXOp.ID);
         assertEquals("/", doc.getPathAsString());
     }
 
@@ -47,7 +48,7 @@ public class TestZippedDita2DocX {
         OperationContext ctx = new OperationContext(session);
         Map<String, Object> params = new HashMap<>();
         params.put("path", path);
-        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocX.ID, params);
+        DocumentModel doc = (DocumentModel) automationService.run(ctx, ZippedDita2DocXOp.ID, params);
         assertEquals(path, doc.getPathAsString());
     }
 }

@@ -2,7 +2,7 @@
 <component name="nuxeo.labs.dita.utils.core.operation.zipped-dita2-doc-x" version="1.0">
 
   <extension point="operations" target="org.nuxeo.ecm.core.operation.OperationServiceComponent">
-    <operation class="nuxeo.labs.dita.utils.core.ZippedDita2DocX"/>
+    <operation class="nuxeo.labs.dita.operations.ZippedDita2DocXOp"/>
   </extension>
 
 </component>
