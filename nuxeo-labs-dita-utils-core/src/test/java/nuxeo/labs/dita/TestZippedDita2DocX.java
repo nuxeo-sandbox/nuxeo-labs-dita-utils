@@ -71,7 +71,7 @@ public class TestZippedDita2DocX {
     }
 
     @Test
-    public void shouldCallTheOperation() throws OperationException {
+    public void testDitaZipExtraction() throws OperationException {
         final String ditaMapFileName = "dita_test.ditamap";
 
         ZippedDita2DocX pe = new ZippedDita2DocX(zipFileBlob);
