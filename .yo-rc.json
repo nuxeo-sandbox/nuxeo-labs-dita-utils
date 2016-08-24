@@ -1,0 +1,10 @@
+{
+  "generator-nuxeo": {
+    "promptValues": {
+      "parent_package": "org.nuxeo.labs.dita.utils",
+      "parent_artifact": "nuxeo-labs-dita-utils-parent",
+      "package": "nuxeo.labs.dita.utils.core"
+    },
+    "multi": true
+  }
+}

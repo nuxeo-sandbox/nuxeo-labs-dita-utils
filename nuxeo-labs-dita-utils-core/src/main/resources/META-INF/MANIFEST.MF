@@ -1,0 +1,9 @@
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Manifest-Version: 1.0
+Bundle-Vendor: nuxeo.labs.dita.utils.core
+Bundle-Version: 1.0.0
+Bundle-Name: nuxeo-labs-dita-utils-core
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: nuxeo.labs.dita.utils.core.nuxeo-labs-dita-utils-core;singleton=true
+Nuxeo-Component: OSGI-INF/zipped-dita2-doc-x-operation-contrib.xml
