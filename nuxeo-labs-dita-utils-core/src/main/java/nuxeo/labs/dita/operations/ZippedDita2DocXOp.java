@@ -30,6 +30,8 @@ import org.nuxeo.ecm.core.api.CoreSession;
 /**
  * Extract zipped DITA project and convert to DOCX.
  *
+ * Assumes there is only one ditamap file in the zip (uses the first one found).
+ *
  * @since 8.3
  */
 @Operation(id = ZippedDita2DocXOp.ID, category = Constants.CAT_BLOB, label = "Zipped DITA to DOCX", description = "Extract zipped DITA project and convert to DOCX.")

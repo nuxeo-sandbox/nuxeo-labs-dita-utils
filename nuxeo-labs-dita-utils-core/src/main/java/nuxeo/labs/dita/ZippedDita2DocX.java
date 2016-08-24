@@ -20,9 +20,9 @@
 package nuxeo.labs.dita;
 
 import org.nuxeo.common.Environment;
+import org.nuxeo.common.utils.FileUtils;
 import org.nuxeo.ecm.core.api.Blob;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
-import org.nuxeo.ecm.core.blob.binary.BinaryBlob;
 import org.nuxeo.runtime.api.Framework;
 
 import java.io.File;
@@ -41,40 +41,66 @@ import java.util.zip.ZipInputStream;
  */
 public class ZippedDita2DocX {
 
-    final int BUFFER = 2048;
-
     private Blob zippedDitaBlob;
+    private Path outDirPath;
 
     public ZippedDita2DocX(Blob inBlob) {
+
         zippedDitaBlob = inBlob;
+
+        String tmpDir = Environment.getDefault().getTemp().getPath();
+        Path tmpDirPath = Paths.get(tmpDir);
+        try {
+            outDirPath = tmpDirPath != null ? Files.createTempDirectory(tmpDirPath, "dita2docx") : Framework.createTempDirectory(null);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
 
     public Blob getDocx() {
         Blob docXBlob;
         File ditaMapFile;
+        File ditaDocXFile;
 
-        // Extract the zip to Nuxeo temp folder.
+        // Extract the zip, get the DITA map file.
         ditaMapFile = unZipDita(zippedDitaBlob);
 
         // Run the converter on it.
-
-        // Locate the output file.
+        ditaDocXFile = convertDita2Docx(ditaMapFile);
 
         // Return that.
-        docXBlob = new FileBlob(ditaMapFile);
+        docXBlob = new FileBlob(ditaDocXFile);
 
         return docXBlob;
     }
 
 
+    private File convertDita2Docx(File ditaMapFile) {
+
+        Runtime rt = Runtime.getRuntime();
+        try {
+            Process pr = rt.exec("dita -i " + ditaMapFile.getAbsolutePath() + " -f docx -o " + outDirPath.toAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // This is totally a hard-coded assumption based on the behavior of `dita`.
+        String docXPath = FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
+        return new File(docXPath);
+    }
+
+
+    /**
+     * Adapted from https://github.com/nuxeo-sandbox/nuxeo-unzip-file
+     *
+     * @param inBlob
+     * @return
+     */
     private File unZipDita(Blob inBlob) {
-        String tmpDir = Environment.getDefault().getTemp().getPath();
-        Path tmpDirPath = tmpDir != null ? Paths.get(tmpDir) : null;
-        Path outDirPath;
         File result = null;
 
         try {
-            outDirPath = tmpDirPath != null ? Files.createTempDirectory(tmpDirPath, "dita2docx") : Framework.createTempDirectory(null);
             byte[] buffer = new byte[1024];
             int len = 0;
 

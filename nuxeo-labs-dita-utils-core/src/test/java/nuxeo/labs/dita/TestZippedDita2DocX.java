@@ -71,14 +71,14 @@ public class TestZippedDita2DocX {
     }
 
     @Test
-    public void testDitaZipExtraction() throws OperationException {
-        final String ditaMapFileName = "dita_test.ditamap";
+    public void testDita2DocX() throws OperationException {
+        final String ditaDocXFileName = "dita_test.docm";
 
         ZippedDita2DocX pe = new ZippedDita2DocX(zipFileBlob);
 
         Blob result = pe.getDocx();
 
-        assertEquals(result.getFilename(), ditaMapFileName);
+        assertEquals(result.getFilename(), ditaDocXFileName);
     }
 
 
