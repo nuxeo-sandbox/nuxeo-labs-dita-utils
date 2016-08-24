@@ -21,8 +21,6 @@ package nuxeo.labs.dita;
 
 import org.nuxeo.common.Environment;
 import org.nuxeo.ecm.core.api.Blob;
-import org.nuxeo.ecm.core.api.DocumentModel;
-import org.nuxeo.ecm.core.api.DocumentRef;
 import org.nuxeo.ecm.core.api.impl.blob.FileBlob;
 import org.nuxeo.ecm.core.blob.binary.BinaryBlob;
 import org.nuxeo.runtime.api.Framework;
@@ -52,8 +50,8 @@ public class ZippedDita2DocX {
     }
 
     public Blob getDocx() {
-        Blob docXBlob ;
-        File ditaMapFile ;
+        Blob docXBlob;
+        File ditaMapFile;
 
         // Extract the zip to Nuxeo temp folder.
         ditaMapFile = unZipDita(zippedDitaBlob);
@@ -63,7 +61,7 @@ public class ZippedDita2DocX {
         // Locate the output file.
 
         // Return that.
-         docXBlob = new FileBlob(ditaMapFile);
+        docXBlob = new FileBlob(ditaMapFile);
 
         return docXBlob;
     }
@@ -87,11 +85,8 @@ public class ZippedDita2DocX {
                 folder.mkdir();
             }
 
-            //copy the input file on temp folder
-            BinaryBlob zipBlob = (BinaryBlob) inBlob;
-
             //get the zip file content
-            ZipInputStream zis = new ZipInputStream(zipBlob.getStream());
+            ZipInputStream zis = new ZipInputStream(inBlob.getStream());
 
             //get the zipped file list entry
             ZipEntry ze = zis.getNextEntry();
