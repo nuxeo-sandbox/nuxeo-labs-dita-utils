@@ -10,8 +10,8 @@
   </parent>
 
   <artifactId>nuxeo-labs-dita-utils-core</artifactId>
-  <name>Nuxeo labs dita utils core</name>
-  <description>Nuxeo Labs DITA utils plug-in</description>
+  <name>Nuxeo Labs DITA Utils Plugin</name>
+  <description>Utilities for handling DITA in Nuxeo.</description>
 
   <dependencies>
     <dependency>

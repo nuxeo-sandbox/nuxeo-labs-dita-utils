@@ -12,14 +12,29 @@
   <groupId>org.nuxeo.labs.dita.utils</groupId>
   <artifactId>nuxeo-labs-dita-utils-parent</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <name>Nuxeo labs dita utils parent</name>
-  <description>Utilities for handling DITA in Nuxeo</description>
+  <name>Nuxeo Labs DITA Utils Parent</name>
+  <description>Parent project from Nuxeo Labs DITA Utils</description>
   <packaging>pom</packaging>
 
   <modules>
-    <module>nuxeo-labs-dita-utils-package</module>
     <module>nuxeo-labs-dita-utils-core</module>
+    <module>nuxeo-labs-dita-utils-package</module>
   </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.nuxeo.labs.dita.utils</groupId>
+        <artifactId>nuxeo-labs-dita-utils-package</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+      <dependency>
+        <groupId>org.nuxeo.labs.dita.utils</groupId>
+        <artifactId>nuxeo-labs-dita-utils-core</artifactId>
+        <version>1.0-SNAPSHOT</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <repositories>
     <repository>
@@ -81,20 +96,5 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
-
-  <dependencyManagement>
-    <dependencies>
-      <dependency>
-        <groupId>org.nuxeo.labs.dita.utils</groupId>
-        <artifactId>nuxeo-labs-dita-utils-package</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-        <groupId>org.nuxeo.labs.dita.utils</groupId>
-        <artifactId>nuxeo-labs-dita-utils-core</artifactId>
-        <version>8.3</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
 </project>
