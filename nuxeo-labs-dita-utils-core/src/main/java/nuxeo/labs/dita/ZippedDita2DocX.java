@@ -77,17 +77,33 @@ public class ZippedDita2DocX {
 
 
     private File convertDita2Docx(File ditaMapFile) {
-
+        Process pr;
+        File docXFile = null;
         Runtime rt = Runtime.getRuntime();
         try {
-            Process pr = rt.exec("dita -i " + ditaMapFile.getAbsolutePath() + " -f docx -o " + outDirPath.toAbsolutePath());
+            pr = rt.exec("dita -i " + ditaMapFile.getAbsolutePath() + " -f docx -o " + outDirPath.toAbsolutePath());
+
+            // Ensure that the process completes
+            try {
+                pr.waitFor();
+            } catch (InterruptedException e) {
+                // Handle exception that could occur when waiting
+                // for a spawned process to terminate
+                e.printStackTrace();
+            }
+
+            // Then examine the process exit code
+            if (pr.exitValue() == 0) {
+                // This is totally a hard-coded assumption based on the behavior of `dita`.
+                String docXPath = FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
+                docXFile = new File(docXPath);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // This is totally a hard-coded assumption based on the behavior of `dita`.
-        String docXPath = FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
-        return new File(docXPath);
+        return docXFile;
     }
 
 
