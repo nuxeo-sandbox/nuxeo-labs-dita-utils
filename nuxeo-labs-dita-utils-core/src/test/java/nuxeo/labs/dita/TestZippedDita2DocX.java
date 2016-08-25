@@ -78,6 +78,8 @@ public class TestZippedDita2DocX {
 
         Blob result = pe.getDocx();
 
+        assert result.getFile().exists();
+
         assertEquals(result.getFilename(), ditaDocXFileName);
     }
 
