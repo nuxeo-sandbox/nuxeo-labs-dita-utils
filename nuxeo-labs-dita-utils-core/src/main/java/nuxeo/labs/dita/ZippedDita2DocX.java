@@ -95,7 +95,7 @@ public class ZippedDita2DocX {
             // Then examine the process exit code
             if (pr.exitValue() == 0) {
                 // This is totally a hard-coded assumption based on the behavior of `dita`.
-                String docXPath = FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
+                String docXPath = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
                 docXFile = new File(docXPath);
             }
 
