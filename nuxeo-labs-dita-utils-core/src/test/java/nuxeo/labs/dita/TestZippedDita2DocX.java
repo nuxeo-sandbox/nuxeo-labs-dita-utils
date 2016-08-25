@@ -72,7 +72,7 @@ public class TestZippedDita2DocX {
 
     @Test
     public void testDita2DocX() throws OperationException {
-        final String ditaDocXFileName = "dita_test.docm";
+        final String ditaDocXFileName = "dita_test.doc";
 
         ZippedDita2DocX pe = new ZippedDita2DocX(zipFileBlob);
 

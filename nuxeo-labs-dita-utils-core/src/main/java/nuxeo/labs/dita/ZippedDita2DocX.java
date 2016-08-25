@@ -97,6 +97,12 @@ public class ZippedDita2DocX {
                 // This is totally a hard-coded assumption based on the behavior of `dita`.
                 String docXPath = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
                 docXFile = new File(docXPath);
+                String newFileName = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".doc";
+
+                if(docXFile.renameTo(new File(newFileName))){
+                    docXFile = new File(newFileName);
+                }
+
             }
 
         } catch (IOException e) {
