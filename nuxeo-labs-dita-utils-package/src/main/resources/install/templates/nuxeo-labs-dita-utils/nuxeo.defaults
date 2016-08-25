@@ -1,5 +1,5 @@
 ## Edit this file to customize your configuration ##
-#nuxeo-labs-d-i-t-a-utils.target=
+#nuxeo-labs-dita-utils.target=
 
 # Set list of templates to include, comma separated values.
 nuxeo.template.includes=common

@@ -1,5 +1,5 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
-<package type="addon" name="nuxeo-labs-d-i-t-a-utils" version="@VERSION@">
+<package type="addon" name="nuxeo-labs-dita-utils" version="@VERSION@">
   <title>Nuxeo Labs DITA Utils</title>
   <description>
     <p>A Nuxeo Package for dealing with DITA content.</p>
