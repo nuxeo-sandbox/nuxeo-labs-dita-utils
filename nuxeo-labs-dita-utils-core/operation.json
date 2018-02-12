@@ -1,0 +1,56 @@
+{
+  "operations": [
+    {
+      "id": "Services.TranslationOnStringOp",
+      "label": "Translate Text",
+      "category": "Services",
+      "requires": null,
+      "description": "Translate Text into English.",
+      "url": "Services.TranslationOnStringOp",
+      "signature": [
+        "String",
+        "String"
+      ],
+      "params": [
+        {
+          "name": "text",
+          "description": "",
+          "type": "String",
+          "required": true,
+          "widget": null,
+          "order": 0,
+          "values": []
+        }
+      ]
+    },
+    {
+      "id": "DITA.ZippedDita2DocXOp",
+      "label": "DITA to DocX",
+      "category": "Blob",
+      "description": "Convert DITA format to DocX.",
+      "url": "Blob.DITA2DocX",
+      "signature": [
+        "blob",
+        "blob"
+      ],
+      "params": [
+        {
+          "name": "document",
+          "type": "document",
+          "required": true,
+          "order": 0,
+          "values": []
+        },
+        {
+          "name": "xpath",
+          "type": "string",
+          "required": false,
+          "order": 0,
+          "values": [
+            "file:content"
+          ]
+        }
+      ]
+    }
+  ]
+}
