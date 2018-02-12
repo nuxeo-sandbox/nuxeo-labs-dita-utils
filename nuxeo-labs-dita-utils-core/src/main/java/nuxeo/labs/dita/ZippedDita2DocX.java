@@ -19,6 +19,7 @@
 
 package nuxeo.labs.dita;
 
+import org.apache.commons.io.IOUtils;
 import org.nuxeo.common.Environment;
 import org.nuxeo.common.utils.FileUtils;
 import org.nuxeo.ecm.core.api.Blob;
@@ -54,7 +55,9 @@ public class ZippedDita2DocX {
             outDirPath = tmpDirPath != null ? Files.createTempDirectory(tmpDirPath, "dita2docx") : Framework.createTempDirectory(null);
         } catch (IOException ex) {
             ex.printStackTrace();
+            throw new RuntimeException(ex);
         }
+
     }
 
 
@@ -81,7 +84,8 @@ public class ZippedDita2DocX {
         File docXFile = null;
         Runtime rt = Runtime.getRuntime();
         try {
-            pr = rt.exec("dita -i " + ditaMapFile.getAbsolutePath() + " -f docx -o " + outDirPath.toAbsolutePath());
+            pr = rt.exec("dita -i " + ditaMapFile.getAbsolutePath() +
+                    " -f docx -o " + outDirPath.toAbsolutePath());
 
             // Ensure that the process completes
             try {
@@ -90,23 +94,26 @@ public class ZippedDita2DocX {
                 // Handle exception that could occur when waiting
                 // for a spawned process to terminate
                 e.printStackTrace();
+                throw new RuntimeException(e);
             }
 
             // Then examine the process exit code
             if (pr.exitValue() == 0) {
                 // This is totally a hard-coded assumption based on the behavior of `dita`.
-                String docXPath = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docm";
+                String docXPath = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".docx";
                 docXFile = new File(docXPath);
                 String newFileName = outDirPath.toAbsolutePath() + File.separator + FileUtils.getFileNameNoExt(ditaMapFile.getPath()) + ".doc";
 
                 if(docXFile.renameTo(new File(newFileName))){
                     docXFile = new File(newFileName);
                 }
-
+            } else {
+                System.err.println("DITA conversion failed");
             }
 
         } catch (IOException e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return docXFile;

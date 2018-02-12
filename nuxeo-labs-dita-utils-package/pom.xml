@@ -1,7 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>org.nuxeo.labs.dita.utils</groupId>
     <artifactId>nuxeo-labs-dita-utils-parent</artifactId>
@@ -11,18 +9,13 @@
 
   <artifactId>nuxeo-labs-dita-utils-package</artifactId>
   <packaging>zip</packaging>
-  <name>Nuxeo Labs DITA Utils Package</name>
+  <name>Nuxeo labs dita utils package - Nuxeo dita converter</name>
 
   <dependencies>
     <!-- Base distribution(s) for the MP -->
     <dependency>
       <groupId>org.nuxeo.ecm.distribution</groupId>
-      <artifactId>nuxeo-distribution-cap</artifactId>
-      <type>pom</type>
-    </dependency>
-    <dependency>
-      <groupId>org.nuxeo.ecm.distribution</groupId>
-      <artifactId>nuxeo-distribution-cap</artifactId>
+      <artifactId>nuxeo-nxr-server</artifactId>
       <type>zip</type>
       <scope>provided</scope>
     </dependency>
@@ -47,5 +40,6 @@
       </plugin>
     </plugins>
   </build>
+
 
 </project>

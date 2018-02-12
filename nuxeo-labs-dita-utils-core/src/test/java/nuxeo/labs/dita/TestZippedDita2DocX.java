@@ -77,7 +77,6 @@ public class TestZippedDita2DocX {
         ZippedDita2DocX pe = new ZippedDita2DocX(zipFileBlob);
 
         Blob result = pe.getDocx();
-
         assert result.getFile().exists();
 
         assertEquals(result.getFilename(), ditaDocXFileName);

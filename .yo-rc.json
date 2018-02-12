@@ -5,6 +5,8 @@
       "parent_artifact": "nuxeo-labs-dita-utils-parent",
       "package": "nuxeo.labs.dita.utils.core"
     },
-    "multi": true
+    "multi": true,
+    "lastRemote": "/Users/dbrown/.cache/node-yeoman-remote-cache/nuxeo/generator-nuxeo-meta/2.8.0",
+    "_nuxeo_version": "1.0-SNAPSHOT"
   }
 }

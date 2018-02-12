@@ -1,8 +1,8 @@
 <!-- See documentation at http://doc.nuxeo.com/x/HgIz -->
-<package type="addon" name="nuxeo-labs-dita-utils" version="@VERSION@">
-  <title>Nuxeo Labs DITA Utils</title>
+<package type="addon" name="nuxeo-dita-converter" version="@VERSION@">
+  <title>Nuxeo dita converter</title>
   <description>
-    <p>A Nuxeo Package for dealing with DITA content.</p>
+    <p>Put here an HTML description of your Nuxeo Package.</p>
   </description>
   <!-- <home-page>http://doc.nuxeo.com/</home-page> -->
   <vendor>Nuxeo</vendor>
